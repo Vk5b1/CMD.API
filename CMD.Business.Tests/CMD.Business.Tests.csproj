@@ -45,6 +45,7 @@
     <Compile Include="ITestManager.cs" />
     <Compile Include="TestManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestNotFoundException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CMD.DTO.Tests\CMD.DTO.Tests.csproj">

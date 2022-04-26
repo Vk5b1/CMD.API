@@ -24,12 +24,17 @@ namespace CMD.Business.Tests
         public void AddTest(TestsDTO testsDTO)
         {
             // Validate with buisiness Rules.
-
-            //convert DTO into Model
-            var test = this.converter.ToTest(testsDTO);
-
-            // save the data into DB.
-            this.repository.AddTest(test);
+            try
+            {
+                //convert DTO into Model
+                var test = this.converter.ToTest(testsDTO);
+                // save the data into DB.
+                this.repository.AddTest(test);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Invalid data" + e.Message);
+            }
         }
 
         public List<TestsDTO> GetTests()
@@ -44,7 +49,15 @@ namespace CMD.Business.Tests
 
         public void DeleteTest(int id)
         {
-            this.repository.DeleteTest(id);
+            try
+            {
+                this.repository.DeleteTest(id);
+            }
+            catch(ArgumentNullException e)
+            {
+                throw new TestNotFoundException("Invalid data" + e.Message);
+            }
+            
         }
         
 

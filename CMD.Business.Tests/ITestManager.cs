@@ -13,7 +13,7 @@ namespace CMD.Business.Tests
         void AddTest(TestsDTO testsDTO);
         List<TestsDTO> GetTests();
         List<RecommendedTestDTO> GetRecommendedTests();
-
+        void DeleteTest(int id);
 
 
 

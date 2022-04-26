@@ -9,11 +9,11 @@ namespace CMD.Repository.Tests
 {
     public class TestRepository : ITestRepository
     {
-        private CMDDBContext cmd;
-        public TestRepository()
-        {
-            cmd = new CMDDBContext();
-        }
+        private CMDDBContext cmd = new CMDDBContext();
+        //public TestRepository()
+        //{
+        //    cmd = new CMDDBContext();
+        //}
         public void AddTest(RecommendedTest test)
         {
             cmd.recomendedTests.Add(test);

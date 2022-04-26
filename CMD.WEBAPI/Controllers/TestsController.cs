@@ -1,5 +1,5 @@
 ﻿using CMD.Business.Tests;
-using CMD.DTO.Tests;
+using CMD.DTO.Tests;    
 using CMD.Model.Tests;
 using System;
 using System.Collections.Generic;
@@ -15,12 +15,11 @@ namespace CMD.WEBAPI.Controllers
     {
         private ITestManager manager = null;
 
-        public TestsController(TestManager manager)
+        public TestsController(ITestManager manager)
         {
             this.manager = manager;
         }
 
-        
         [HttpPost]
         public IHttpActionResult AddTest(TestsDTO test)
         {
@@ -50,11 +49,7 @@ namespace CMD.WEBAPI.Controllers
         {
 
             var tests = this.manager.GetRecommendedTests();
-            if (tests == null || tests.Count == 0)
-            {
-                return BadRequest("No data is found in master data");
-            }
-
+            
             return Ok(tests);
         }
         [HttpDelete]
@@ -64,6 +59,7 @@ namespace CMD.WEBAPI.Controllers
             {
                 return BadRequest("Invalid input");
             }
+            this.manager.DeleteTest(id);    
             return Ok();
         }
     }
