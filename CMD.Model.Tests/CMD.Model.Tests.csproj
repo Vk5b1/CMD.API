@@ -42,11 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="keyAttribute.cs" />
+    <Compile Include="Appointment.cs" />
+    <Compile Include="PatientDetail.cs" />
     <Compile Include="RecommendedTest.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCategory.cs" />
+    <Compile Include="TestReport.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CMD.Model.Tests
 {
-    public class Test
+    public class Appointment
     {
-        [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
+        public PatientDetail PatientDetail { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using CMD.Business.Tests;
-using CMD.DTO.Tests;    
 using CMD.Model.Tests;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Web.Http;
 
 namespace CMD.WEBAPI.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("api/tests")]
     public class TestsController : ApiController
     {
         private ITestManager manager = null;
@@ -20,47 +19,49 @@ namespace CMD.WEBAPI.Controllers
             this.manager = manager;
         }
 
+        [Route("{appointmnetId}")]
         [HttpPost]
-        public IHttpActionResult AddTest(TestsDTO test)
+        public IHttpActionResult AddTest(int appointmnetId,Test test) // Adding Testreport to the ICollection<TestReport>                   done
         {
             if (test == null)
                 return BadRequest("Invalid input");
-
-            this.manager.AddTest(test);
-
-            return Created($"api/tests/{test.Id}", test);
-        }
-        [Route("test")]
-        [HttpGet]
-        public IQueryable<TestsDTO> GetTests()
-        {
-            var tests = this.manager.GetTests();
-            //if (tests == null || tests.Count == 0)
-            //{
-            //    return 
-            //}
-
-            return tests.AsQueryable();
-        }
-
-        [Route("recommendedtest")]
-        [HttpGet]
-        public IHttpActionResult GetRecommendedTest()
-        {
-
-            var tests = this.manager.GetRecommendedTests();
-            
-            return Ok(tests);
-        }
-        [HttpDelete]
-        public IHttpActionResult RemoveTest(int id)
-        {
-            if(id < 0)
-            {
+            if(appointmnetId < 0)
+            { 
                 return BadRequest("Invalid input");
             }
-            this.manager.DeleteTest(id);    
-            return Ok();
+
+            return Ok(this.manager.AddTest(test, appointmnetId));
+        }
+
+        //[Route("api/GetTests")]
+        [HttpGet]
+        public IHttpActionResult GetTests() //Getting master data from the database.                                                              done
+        {
+            var tests = this.manager.GetAllTests();
+            return Ok(tests);
+        }
+
+        [Route("GetRecommendedTest/{appointmentId}")]
+        [HttpGet]
+        public IHttpActionResult GetRecommendedTest(int appointmentId) // Getting recommended tests from the ICollection<TestReport>               done
+        {
+            var tests = this.manager.GetRecommendedTests(appointmentId);
+            return Ok(tests);
+        }
+
+        [Route("RemoveTest/testReportid/{testReportId}/appointmentid/{appointmentId}")]
+        [HttpDelete]
+        public IHttpActionResult RemoveTest(int testReportId, int appointmentId) // Removing the testreport from the ICollection<TestReport>        done
+        {
+            var result = this.manager.DeleteTest(appointmentId, testReportId);
+            return Ok(result);
+        }
+
+        [Route("GetTestReports")]
+        [HttpGet]
+        public IHttpActionResult GetTestReports()
+        {
+            return Ok(this.manager.GetTestReports());
         }
     }
 }

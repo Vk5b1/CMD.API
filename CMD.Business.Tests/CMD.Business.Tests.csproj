@@ -60,10 +60,6 @@
       <Project>{3cf6f5fa-aae6-46d5-a13a-6fd6a04c7ab8}</Project>
       <Name>CMD.Repository.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestsConverter\TestsConverter.csproj">
-      <Project>{4049361A-5EE7-4949-985B-FF9E38D18423}</Project>
-      <Name>TestsConverter</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

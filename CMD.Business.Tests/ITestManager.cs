@@ -10,10 +10,11 @@ namespace CMD.Business.Tests
 {
     public interface ITestManager
     {
-        void AddTest(TestsDTO testsDTO);
-        List<TestsDTO> GetTests();
-        List<RecommendedTestDTO> GetRecommendedTests();
-        void DeleteTest(int id);
+        TestReport AddTest(Test test, int appointmentId);                                                     // done
+        List<Test> GetAllTests();                                                                             // done
+        List<Test> GetRecommendedTests(int appointmentId);                                                    // done
+        TestReport DeleteTest(int testReportId, int appointmentId);
+        List<TestReportDTO> GetTestReports();
 
 
 

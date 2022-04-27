@@ -9,9 +9,13 @@ namespace CMD.Repository.Tests
 {
     public interface ITestRepository
     {
-        void AddTest(RecommendedTest test);
-        List<Test> GetTestNames();
-        void DeleteTest(int id);
-        List<RecommendedTest> GetTests(); // fetching the tests that are added by doctor.
+        TestReport AddTest(Test test, int appointmentId);                                         // done
+        List<Test> GetAllTests();                                                                 // done
+        TestReport DeleteTest(int appointmnetId, int testReportId);
+        ICollection<TestReport> GetRecommendedTests(int appointmentId);
+        List<TestReport> GetTestReports();
+
+        // fetching the tests that are added by doctor.            // done
+        //ICollection<TestReport> GetTestsByPatientId(int id);
     }
 }

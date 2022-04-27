@@ -10,76 +10,75 @@ namespace CMD.Business.Tests
 {
     public class Converter
     {
-        public List<TestsDTO> ToTestDTOList(List<Test> tests)
+        public List<TestReportDTO> ToTestReportDTOList(List<TestReport> testReports)  // converting the Test list to TestDTO list
         {
-            if (tests == null)
+            if (testReports == null)
             {
                 return null;
             }
-            List<TestsDTO> testDTOs = new List<TestsDTO>();
-            foreach (Test test in tests)
+            List<TestReportDTO> testReportDTO = new List<TestReportDTO>();
+            foreach (TestReport report in testReports)
             {
-                testDTOs.Add(ToTestDTO(test));
+                testReportDTO.Add(ToTestReportDTO(report));
             }
-            return testDTOs;
+            return testReportDTO;
         }
 
-        public TestsDTO ToTestDTO(Test test)
+        public TestReportDTO ToTestReportDTO(TestReport testReport) // Converting the Test To TestDTO
         {
-            if (test == null)
+            if (testReport == null)
             {
                 return null;
             }
-            TestsDTO testDTO = new TestsDTO
+            TestReportDTO testReportDTO = new TestReportDTO
             {
-                Id = test.Id,
-                TestName = test.Name,
-                CategoryID = test.Category.Id,
+                Id = testReport.Id,
+                TestId = testReport.TestId,
             };
-            return testDTO;
+            return testReportDTO;
         }
 
-        public RecommendedTest ToTest(TestsDTO testDTO)//, ITestRepository appointmentRepo)
-        {
-            if (testDTO == null)
-            {
-                return null;
-            }
-            RecommendedTest test = new RecommendedTest
-            {
-                TestId = testDTO.Id,
-                TestName = testDTO.TestName,
-            };
+        //public RecommendedTest ToTest(TestsDTO testDTO) // converting the TestDTO To Test
+        //{
+        //    if (testDTO == null)
+        //    {
+        //        return null;
+        //    }
+        //    RecommendedTest test = new RecommendedTest
+        //    {
+        //        TestId = testDTO.Id,
+        //        TestName = testDTO.TestName,
+        //    };
 
-            return test;
-        }
+        //    return test;
+        //}
 
-        public List<RecommendedTestDTO> ToRecommendedTestDTOList(List<RecommendedTest> tests)
-        {
-            if (tests == null)
-            {
-                return null;
-            }
-            List<RecommendedTestDTO> testDTOs = new List<RecommendedTestDTO>();
-            foreach (RecommendedTest test in tests)
-            {
-                testDTOs.Add(ToRecommendedTestDTO(test));
-            }
-            return testDTOs;
-        }
+        //public List<RecommendedTestDTO> ToRecommendedTestDTOList(List<RecommendedTest> tests) // Cpnverting the RecomendedTest to RecomendedTestDTO
+        //{
+        //    if (tests == null)
+        //    {
+        //        return null;
+        //    }
+        //    List<RecommendedTestDTO> testDTOs = new List<RecommendedTestDTO>();
+        //    foreach (RecommendedTest test in tests)
+        //    {
+        //        testDTOs.Add(ToRecommendedTestDTO(test));
+        //    }
+        //    return testDTOs;
+        //}
 
-        public RecommendedTestDTO ToRecommendedTestDTO(RecommendedTest test)
-        {
-            if (test == null)
-            {
-                return null;
-            }
-            RecommendedTestDTO testDTO = new RecommendedTestDTO
-            {
-                Id = test.TestId,
-                Name = test.TestName,
-            };
-            return testDTO;
-        }
+        //public RecommendedTestDTO ToRecommendedTestDTO(RecommendedTest test)
+        //{
+        //    if (test == null)
+        //    {
+        //        return null;
+        //    }
+        //    RecommendedTestDTO testDTO = new RecommendedTestDTO
+        //    {
+        //        Id = test.TestId,
+        //        Name = test.TestName,
+        //    };
+        //    return testDTO;
+        //}
     }
 }

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestsConverter;
 
 
 namespace CMD.Business.Tests
@@ -21,15 +20,13 @@ namespace CMD.Business.Tests
             this.repository = repository;
             converter = new Converter();
         }
-        public void AddTest(TestsDTO testsDTO)
+        public TestReport AddTest(Test test, int appointmentId) // Adding Testreport to the ICollection<TestReport>                   // done
         {
             // Validate with buisiness Rules.
             try
             {
-                //convert DTO into Model
-                var test = this.converter.ToTest(testsDTO);
                 // save the data into DB.
-                this.repository.AddTest(test);
+                return this.repository.AddTest(test,appointmentId);
             }
             catch (Exception e)
             {
@@ -37,29 +34,36 @@ namespace CMD.Business.Tests
             }
         }
 
-        public List<TestsDTO> GetTests()
-        {
-            return this.converter.ToTestDTOList(this.repository.GetTestNames());
+        public List<Test> GetAllTests()  //Getting master data from the database.                                                             //done
+        { 
+            return this.repository.GetAllTests();
         }
 
-        public List<RecommendedTestDTO> GetRecommendedTests()
+        public List<Test> GetRecommendedTests(int appointmentId) //Getting recommended tests from the ICollection<TestReport>               // done
         {
-            return this.converter.ToRecommendedTestDTOList(this.repository.GetTests());
+            return this.repository.GetRecommendedTests(appointmentId).Select(t => t.Test).ToList();
         }
 
-        public void DeleteTest(int id)
+        public TestReport DeleteTest(int appointmentId, int testReportId)  // Removing the testreport from the ICollection<TestReport>              // done
         {
-            try
-            {
-                this.repository.DeleteTest(id);
-            }
-            catch(ArgumentNullException e)
-            {
-                throw new TestNotFoundException("Invalid data" + e.Message);
-            }
+            //try
+            //{
+                return this.repository.DeleteTest(appointmentId, testReportId);
+            //}
+            //catch(ArgumentNullException e)
+            //{
+            //    throw new TestNotFoundException("Invalid data" + e.Message);
+            //}
             
         }
-        
+
+        public List<TestReportDTO> GetTestReports()
+        {
+            return this.converter.ToTestReportDTOList(this.repository.GetTestReports());
+        }
+
+
+
 
 
 
